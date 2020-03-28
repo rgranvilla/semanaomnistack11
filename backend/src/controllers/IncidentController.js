@@ -2,7 +2,7 @@ const connection = require('../database/connection')
 
 module.exports = {
   async index( request, response ) {
-    const { page = 1 } = request.query;
+    const { page = 1 } = request.query
 
     const [count] = await connection('incidents').count()
 
@@ -51,7 +51,9 @@ module.exports = {
       return response.status(401).json({ error: 'Operation not permitted.'})
     }
     
-    await connection('incidents').where('id', id).delete()
+    await connection('incidents')
+      .where('id', id)
+      .delete()
 
     return response.status(204).send()
   }
